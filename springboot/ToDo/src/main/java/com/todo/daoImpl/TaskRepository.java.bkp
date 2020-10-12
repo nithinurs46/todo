@@ -1,0 +1,13 @@
+package com.todo.daoImpl;
+
+import java.util.List;
+
+import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
+
+import com.todo.forms.TaskForm;
+
+public interface TaskRepository extends ElasticsearchRepository<TaskForm, String> {
+	
+	List<TaskForm> findByTaskName(String taskName);
+
+}

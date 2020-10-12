@@ -1,0 +1,55 @@
+
+
+Postgres scripts -->
+
+CREATE TABLE todo_tasks (
+    task_name     VARCHAR(255) NOT NULL,
+    completed     VARCHAR(255),
+    description   VARCHAR(255),
+    task_date     DATE,
+    time          VARCHAR(255),
+    user_id       VARCHAR(255),
+    PRIMARY KEY ( task_name )
+)
+
+CREATE TABLE todo_users (
+    user_id        VARCHAR(255) NOT NULL,
+    active         boolean,
+    created_date   TIMESTAMP,
+    first_name     VARCHAR(255),
+    last_name      VARCHAR(255),
+    password       VARCHAR(255),
+    roles          VARCHAR(255),
+    PRIMARY KEY ( user_id )
+)
+
+///////////////////////////////////////////////////////////////////
+
+oracle scripts -->
+
+
+CREATE TABLE "TODO_USERS" (
+    "USER_ID"        VARCHAR2(20 BYTE)
+        NOT NULL ENABLE,
+    "PASSWORD"       VARCHAR2(120 BYTE)
+        NOT NULL ENABLE,
+    "CREATED_DATE"   DATE,
+    "ACTIVE"         VARCHAR2(6 BYTE),
+    "ROLES"          VARCHAR2(20 BYTE),
+    "FIRST_NAME"     VARCHAR2(120 BYTE),
+    "LAST_NAME"      VARCHAR2(120 BYTE),
+    CONSTRAINT "TODO_LOGIN_PK" PRIMARY KEY ( "USER_ID" )
+);
+
+CREATE TABLE "TODO_TASKS" (
+    "TASK_NAME"     VARCHAR2(50 BYTE)
+        NOT NULL ENABLE,
+    "TASK_DATE"     DATE
+        NOT NULL ENABLE,
+    "DESCRIPTION"   VARCHAR2(100 BYTE),
+    "COMPLETED"     VARCHAR2(5 BYTE),
+    "TIME"          VARCHAR2(6 BYTE),
+    "USER_ID"       VARCHAR2(20 BYTE),
+    CONSTRAINT "TODO_TASKS_PK" PRIMARY KEY ( "TASK_NAME" )
+);
+
