@@ -1,0 +1,20 @@
+<div class="container" style="margin-left: 20px; margin-top: 20px;">
+  <div fxLayout="column" fxLayoutGap="32px">
+    <div>
+      <button mat-raised-button color="primary" type="button" (click)="connectClicked()">Connect</button>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <button mat-raised-button color="primary" type="button" (click)="disconnectClicked()">Disconnect</button>
+    </div>
+
+
+    <div>
+      <button mat-raised-button color="primary" type="button" (click)="startClicked()">Start listening</button>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <button mat-raised-button color="primary" type="button" (click)="stopClicked()">Stop listening</button>
+    </div>
+  </div>
+
+  <div>
+    <span *ngFor="let notification of notifications">{{notification}} </span></div>
+
+</div>

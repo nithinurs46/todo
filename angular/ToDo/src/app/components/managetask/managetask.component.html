@@ -1,0 +1,34 @@
+<div class="ui-g-12">
+    <p-table [columns]="cols" [value]="tasks" [(selection)]="selectedTask" dataKey="taskName" [scrollable]="true"
+        scrollHeight="250px" [lazy]="true" (onLazyLoad)="loadTasks($event)" [paginator]="true" [rows]="10"
+        [totalRecords]="totalRecords" [loading]="loading">
+
+        <ng-template pTemplate="caption">
+            Tasks List
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                    {{col.header}}
+                    <p-sortIcon [field]="col.field" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+                </th>
+                <th>Mark as completed</th>
+                <th>Delete</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-task let-rowData let-columns="columns">
+            <tr>
+                <td *ngFor="let col of cols">
+                    {{rowData[col.field]}}
+                </td>
+                <td *ngIf="task.completed=='true'" (click)="markCompletion(rowData)"><i class="pi pi-check"></i></td>
+                <td *ngIf="task.completed=='false'" (click)="markCompletion(rowData)"><i class="pi pi-times"></i></td>
+
+                <td (click)="deleteTask(rowData)"><i class="pi pi-trash"></i></td>
+
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
