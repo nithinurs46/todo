@@ -14,11 +14,12 @@ import com.todo.forms.TaskForm;
 
 public class EmailHelper {
 
-	public String emailSender = "user1@outlook.com";
-	public String emailRecipient = "user2@outlook.com";
-	public String accountPwd = "Password1";
-	public String host = "....";
+	public String emailSender = "tsmonitor@jadolisystems.com";
+	public String emailRecipient = "nithinurs.venugopalrajurs@arisglobal.com";
+	public String officePassword = "Password1";
+	public String host = "192.168.150.160";
 	public String port = "25";
+
 
 	public void sendEmail(TaskForm task) {
 
@@ -38,10 +39,11 @@ public class EmailHelper {
 		properties.setProperty("mail.smtp.host", host);
 		properties.put("mail.smtp.port", port);
 		properties.put("mail.smtp.auth", "true");
+		
 
 		Session session = Session.getDefaultInstance(properties, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(emailSender, accountPwd);
+				return new PasswordAuthentication(emailSender, officePassword);
 			}
 		});
 
