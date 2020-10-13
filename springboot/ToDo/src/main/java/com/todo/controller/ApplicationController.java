@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -119,19 +120,22 @@ public class ApplicationController {
 	}
 	
 	@PostMapping(value="/createTask")
-	public boolean createNewTask(@RequestBody TaskForm taskForm, Principal principal) {
+	public boolean createNewTask(@RequestBody TaskForm taskForm) {
+		Authentication principal =  SecurityContextHolder.getContext().getAuthentication();
 		taskMgrSvc.createTask(taskForm, principal.getName());
 		return true;
 	}
 	
 	@GetMapping(value="/getTasks")
-	public ResponseEntity<Object> getTasks(@RequestParam(defaultValue = "1") String pageNo, Principal principal) {
+	public ResponseEntity<Object> getTasks(@RequestParam(defaultValue = "1") String pageNo) {
+		Authentication principal =  SecurityContextHolder.getContext().getAuthentication();
 		Map<String, Object> tasksData = taskMgrSvc.retreiveAllTasksOfUser(pageNo, principal.getName());
 		return ResponseEntity.ok().body(tasksData);
 	}
 	
 	@PostMapping(value="/updateCompletion")
-	public ResponseEntity<Object> updateCompletionStatus(@RequestBody TaskForm taskForm, Principal principal) {
+	public ResponseEntity<Object> updateCompletionStatus(@RequestBody TaskForm taskForm) {
+		Authentication principal =  SecurityContextHolder.getContext().getAuthentication();
 		Map<String, Object>  tasksData =  taskMgrSvc.updateStatus(taskForm, principal.getName());
 		return ResponseEntity.ok().body(tasksData);
 	}
@@ -144,7 +148,8 @@ public class ApplicationController {
 	}
 	
 	@PostMapping(value = "/deleteTask")
-	public ResponseEntity<Object> deleteTask(@RequestBody TaskForm task, Principal principal) {
+	public ResponseEntity<Object> deleteTask(@RequestBody TaskForm task) {
+		Authentication principal =  SecurityContextHolder.getContext().getAuthentication();
 		Map<String, Object> taskData = taskMgrSvc.removeTask(task.getTaskName(), principal.getName());
 		return ResponseEntity.ok().body(taskData);
 	}
